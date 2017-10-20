@@ -27,8 +27,9 @@ You're reading it!
 
 Here is the structure of my model.  
 
-[image1]: ./network_structure.png
+[image1]: network_structure.png
 ![alt text][image1]
+
 
 3 encoders and 3 decoders are used, with [32, 64, 64] filters of each encoder and [64, 64, 32] in each decoder.  And the 1x1 conv layer has 128 filters. The structure is much like [U-Net](https://arxiv.org/abs/1505.04597), but not that deep for the sake of efficiency.
 
@@ -66,7 +67,7 @@ steps_per_epoch = 200
 validation_steps = 50
 workers = 4
 ```
-As to the hyper-parameters, I tried to increase the batch_size and epochs, but it often goes to overfitting, especially when val_loss and train_loss are low. The val_loss would fluctuate. To avoid overfitting, I picked relatively small learning_rate=0.008 with decay=0.0003. The batch_size=32 and epochs=15, I think that's an ordinary value. 
+As to the hyper-parameters, I tried to increase the batch_size and epochs, but it often goes to overfitting, especially when val_loss and train_loss are low. The val_loss would fluctuate. To avoid overfitting, I picked relatively small learning_rate=0.008 with decay=0.0003. The batch_size=32 and epochs=15, I think that's an ordinary value.
 
 #### 4. The student has a clear understanding and is able to identify the use of various techniques and concepts in network layers indicated by the write-up.
 
@@ -89,10 +90,10 @@ Here is my understanding of concepts and techniques used in my network.
 
 #### 5. The student has a clear understanding of image manipulation in the context of the project indicated by the write-up.
 
-[image2]: ./result1.png
+[image2]: result1.png
 ![alt text][image2]
 
-[image3]: ./result2.png
+[image3]: result2.png
 ![alt text][image3]
 
 The original rgb image(left) is the input for traing, validation and testing. The label(middle) is processed by the DroneSim Simulator which gives a semantic segmentation result. Our semantic segmentation model is a kind of FCN(Fully Convolutional Network), by classifying every pixel into different classes. In our case, there are 3 classes: hero(blue), people(green) and the background(red). A softmax activation is used to determine which class the pixel belongs to.
