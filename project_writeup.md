@@ -26,8 +26,10 @@ You're reading it!
 #### 2. The write-up conveys the an understanding of the network architecture.
 
 Here is the structure of my model.  
+
 [image1]: ./network_structure.png
 ![alt text][image1]
+
 3 encoders and 3 decoders are used, with [32, 64, 64] filters of each encoder and [64, 64, 32] in each decoder.  And the 1x1 conv layer has 128 filters. The structure is much like [U-Net](https://arxiv.org/abs/1505.04597), but not that deep for the sake of efficiency.
 
 The encoders extract the useful messages from the image, and decoders upsample the input feature map and concatenates with  encoder with the same size.
@@ -56,6 +58,15 @@ The decoder is symmetric to encoder, the params like filters, strides, kernel si
 
 I tried many many different params and found 3 or 4 encoders and decoders gives the best result.
 
+```
+learning_rate = 0.008
+batch_size = 32
+num_epochs = 15
+steps_per_epoch = 200
+validation_steps = 50
+workers = 4
+```
+As to the hyper-parameters, I tried to increase the batch_size and epochs, but it often goes to overfitting, especially when val_loss and train_loss are low. The val_loss would fluctuate. To avoid overfitting, I picked relatively small learning_rate=0.008 with decay=0.0003. The batch_size=32 and epochs=15, I think that's an ordinary value. 
 
 #### 4. The student has a clear understanding and is able to identify the use of various techniques and concepts in network layers indicated by the write-up.
 
@@ -80,6 +91,7 @@ Here is my understanding of concepts and techniques used in my network.
 
 [image2]: ./result1.png
 ![alt text][image2]
+
 [image3]: ./result2.png
 ![alt text][image3]
 
